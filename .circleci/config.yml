@@ -61,11 +61,11 @@ jobs:
       - checkout
       - run:
           name: Heroku Deploy
-          command: git push https://heroku:$HEROKU_KEY@git.heroku.com//damp-sea-12569.git HEAD:main 
+          command: git push https://heroku:$HEROKU_KEY@git.heroku.com/shielded-shelf-71885.git HEAD:main 
       - run:
           name: Smoke Test
           command: |
-            HTTPCODE=`curl -s -o /dev/null -w "%{http_code}" https://damp-sea-12569.herokuapp.com/`
+            HTTPCODE=`curl -s -o /dev/null -w "%{http_code}" https://shielded-shelf-71885.herokuapp.com/`
             if [ "$HTTPCODE" -ne 200 ];then
                 echo "heroku app not responding, failing deploy"
                 exit 1
