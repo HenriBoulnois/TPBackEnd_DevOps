@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { TodosModule } from './todos/todos.module';
 
 @Module({
   imports: [
@@ -19,10 +18,14 @@ import { TodosModule } from './todos/todos.module';
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
         logging: configService.isLoggingDb ? 'all' : false,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false
+          },
+        },
       }),
       inject: [ConfigService],
     }),
-    TodosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
